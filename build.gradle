@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'kr'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    // Standard Maven 
+    mavenCentral()
+    maven {
+        url "https://repository.cloudera.com/artifactory/cloudera-repos/"
+    }
+}
+
+dependencies {
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.4.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.1.4.RELEASE'
+
+    compile group: 'org.apache.hadoop', name: 'hadoop-client', version: '2.6.0-cdh5.15.1'
+
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+
+    compile group: 'com.google.guava', name: 'guava', version: '27.1-jre'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.compile
+    into 'dependencies'
+}
